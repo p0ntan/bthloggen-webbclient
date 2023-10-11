@@ -61,6 +61,9 @@ export default{
     background-color: #bdbbb7;
     border-radius: 8px;
     margin-bottom: 1rem;
+    cursor: pointer;
+
+    transition: 0.25s ease;
 }
 
 .domain,
@@ -92,7 +95,6 @@ export default{
 .wrapper:hover,
 .wrapper:focus {
     transform: translateX(5px);
-    cursor: pointer;
     transition: 0.25s ease;
 }
 </style>
