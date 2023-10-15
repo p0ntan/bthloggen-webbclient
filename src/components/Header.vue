@@ -26,6 +26,7 @@
 <script>
 import SearchField from './blocks/SearchField.vue';
 export default {
+    name: 'Header',
     components: {
         SearchField
     }
