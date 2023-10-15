@@ -28,33 +28,4 @@ export default {
 h2 {
     text-align: center;
 }
-
-table {
-    width: 100%;;
-}
-
-thead,
-tbody {
-    width: 100%;
-}
-
-tr {
-    border: 2px solid white;
-}
-
-th,
-td {
-    color: white;
-    max-width: 150px;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    border: 0;
-    border-bottom: 1px solid var(--c-gray-600);
-    background-color: transparent;
-    padding-left: 1.5rem;
-    text-align: center;
-}
-td.small {
-    max-width: 100px
-}
 </style>

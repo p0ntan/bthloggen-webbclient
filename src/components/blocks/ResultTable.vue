@@ -1,15 +1,20 @@
 <template>
-    <span>Antal pr sida: </span>
-    <form>
-        <input type="number" :placeholder="itemsPerPage" v-model="updatedItemsPerPage">
-        <button type="submit" @click.prevent="updateResultTable">Uppdatera</button>
-    </form>
-    <div>
+    <div class="flex-jc-center">
+        <span>Antal pr sida: </span>
+        <form>
+            <input type="number" :placeholder="itemsPerPage" v-model="updatedItemsPerPage">
+            <button type="submit" @click.prevent="updateResultTable">Uppdatera</button>
+        </form>
+    </div>
+
+    <div class="flex-jc-even">
         <button @click="prevPage" :disabled="currentPage <= 0">Föregående</button>
         
-        <span v-for="page in pageLinks" :key="page" @click="jumpToPage(page-1)" class="page-link" :class="page == currentPage + 1 ? 'active' : ''">
-            {{ page }}
-        </span>
+        <div class="min-w-210">
+            <span v-for="page in pageLinks" :key="page" @click="jumpToPage(page-1)" class="page-link" :class="page == currentPage + 1 ? 'active' : ''">
+                {{ page }}
+            </span>
+        </div>
 
         <button @click="nextPage" :disabled="currentPage >= totalPages - 1">Nästa</button>
     </div>
@@ -117,6 +122,30 @@ export default {
 <style>
 h2 {
     text-align: center;
+}
+
+.flex-jc-center {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.flex-jc-center form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.flex-jc-even {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flex-jc-even div {
+    min-width: 210px;
+    display: flex;
+    justify-content: center;
 }
 
 table {

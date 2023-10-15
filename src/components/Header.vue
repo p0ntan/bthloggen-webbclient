@@ -9,12 +9,6 @@
                     <span>Log</span>
                     <span>Data</span>
                 </h1>
-                <!-- <button class="user-profile">
-                    <span>Pontus Åkerberg</span>
-                    <span>
-                        <img src="/me.png" />
-                    </span>
-                </button> -->
             </div>
         </div>
         <div class="app-header-search">
