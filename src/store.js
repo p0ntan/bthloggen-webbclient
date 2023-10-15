@@ -4,7 +4,8 @@ import { reactive } from 'vue'
 const store = reactive({
     result: -1,
     prevSearches: [],
-    fetchUrl: 'http://localhost:1338/getdata'
+    fetchUrl: 'http://localhost:1338/getdata',
+    prevParam: {}
 })
 
 export default store

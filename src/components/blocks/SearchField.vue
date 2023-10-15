@@ -1,7 +1,7 @@
 <template>
     <h2>Sök efter logdata</h2>
     <p>Filtrera logdatan sökparamterarna nedan, tryck sedan enter eller klicka på sök.</p>
-    <p>Om du väljer någon filtrering visas all logdata.</p>
+    <p>Om du inte väljer någon filtrering visas all logdata.</p>
     <div class="header-search-field">
         <form @submit.prevent="search" class="search-field">
             <input type="text" placeholder="Url" v-model="url">
@@ -65,6 +65,15 @@ export default {
             // }
         }
     },
+    watch: {
+        '$store.prevParam': {
+            handler() {
+                for (const [key, value] of Object.entries(this.$store.prevParam)) {
+                    this.$data[key] = value
+                }
+            }
+        }
+    }
 }
 </script>
 
@@ -95,16 +104,19 @@ p {
     border: 0;
     border-bottom: 1px solid var(--c-gray-600);
     background-color: transparent;
-    padding-left: 1.5rem;
+    text-align: center;
 }
 
 .search-field input.small {
     max-width: 100px
 }
 
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 860px) {
     .search-field {
         flex-direction: column;
+        align-items: center;
     }
+
+
 }
 </style>

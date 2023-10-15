@@ -35,11 +35,22 @@ export default {
 	align-items: flex-end;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1080px) {
     .app-header {
-		align-items: center;
-		justify-content: space-between;
-		border-bottom: 1px solid var(--c-gray-600);
+		display: block;
+    }
+    .app-header-logo {
+        top: 0;
+        left: 20px;
+        scale: 0.5;
+        position: absolute;
+    }
+}
+
+@media (max-width: 730px) {
+    .app-header-logo {
+        display: none;
+        visibility: hidden;
     }
 }
 </style>
