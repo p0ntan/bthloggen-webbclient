@@ -30,39 +30,22 @@ export default {
     },
     methods: {
         async search() {
-            let counter = 0;
-            let query = '';
-            const objParam = {...this.$data};
+            try {
+                const response = await fetch(this.$store.fetchUrl, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({...this.$data})
+                })
+                const result = await response.json()
 
-            for (const [key, value] of Object.entries(objParam)) {
-                if (value && counter === 0) {
-                    query = `?${key}=${value}`;
-                    counter++;
-                } else if (value) {
-                    query += `&${key}=${value}`;
-                }
+                this.$store.result = result
+                this.$store.prevSearches.push({...this.$data, hits: result.length})
+            } catch (error) {
+                console.error(error)
             }
-            const response = await fetch(`http://localhost:1337/data` + query);
-            const result = await response.json()
-
-            this.$store.result = result
-            this.$store.prevSearches.push({...this.$data, hits: result.length})
-            // try {
-            //     const response = await fetch(this.$store.fetchUrl, {
-            //         method: 'POST',
-            //         mode: 'cors',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         },
-            //         body: JSON.stringify({...this.$data})
-            //     })
-            //     const result = await response.json()
-
-            //     this.$store.result = result
-            //     this.$store.prevSearches.push({...this.$data, hits: result.length})
-            // } catch (error) {
-            //     console.error(error)
-            // }
         }
     },
     watch: {
