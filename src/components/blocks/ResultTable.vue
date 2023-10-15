@@ -1,7 +1,7 @@
 <template>
     <span>Antal pr sida: </span>
     <form>
-        <input type="number" :placeholder="itemsPerPage" v-model="itemsPerPage">
+        <input type="number" :placeholder="itemsPerPage" v-model="updatedItemsPerPage">
         <button type="submit" @click.prevent="updateResultTable">Uppdatera</button>
     </form>
     <div>
@@ -47,6 +47,7 @@ export default {
     data() {
         return {
             itemsPerPage: 100,
+            updatedItemsPerPage: 100,
             currentPage: 0,
             totalPages: null,
             paginatedResults: [],
@@ -97,9 +98,14 @@ export default {
                 startPage = 1
             }
 
-            this.pageLinks = Array.from({ length: (endPage - startPage + 1) }, (_, i) => i + startPage)
+            this.pageLinks = []
+ 
+            for (let i = startPage; i <= endPage; i++) {
+                this.pageLinks.push(i)
+            }
         },
         updateResultTable() {
+            this.itemsPerPage = this.updatedItemsPerPage
             this.totalPages = Math.ceil(this.$store.result.length / this.itemsPerPage)
             this.updatePageLinks()
             this.paginateResults()
