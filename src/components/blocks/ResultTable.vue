@@ -10,7 +10,7 @@
     <div class="flex-jc-even">
         <button @click="prevPage" :disabled="currentPage <= 0">Föregående</button>
         
-        <div class="min-w-210">
+        <div>
             <span v-for="page in pageLinks" :key="page" @click="jumpToPage(page-1)" class="page-link" :class="page == currentPage + 1 ? 'active' : ''">
                 {{ page }}
             </span>
@@ -33,11 +33,11 @@
         <tbody>
             <tr v-for="(result, index) in paginatedResults">
                 <td class="shaded">{{ (index + 1) + (currentPage  * itemsPerPage) }}</td>
-                <td>{{ result.url }}</td>
-                <td>{{ result.ip }}</td>
-                <td>{{ result.month }}</td>
-                <td>{{ result.day }}</td>
-                <td>{{ result.time }}</td>
+                <td data-label="Url">{{ result.url }}</td>
+                <td data-label="Ip-adress">{{ result.ip }}</td>
+                <td data-label="Månad">{{ result.month }}</td>
+                <td data-label="Dag">{{ result.day }}</td>
+                <td data-label="Klockslag">{{ result.time }}</td>
             </tr>
         </tbody>
     </table>
@@ -140,12 +140,32 @@ h2 {
 .flex-jc-even {
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: 0.5rem;
 }
 
 .flex-jc-even div {
     min-width: 210px;
     display: flex;
     justify-content: center;
+}
+
+@media (max-width: 450px) {
+    .flex-jc-center,
+    .flex-jc-even {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .flex-jc-center > *,
+    .flex-jc-even > * {
+        min-height: 36px;
+    }
+
+    .flex-jc-even > div {
+        justify-content: space-evenly;
+        align-items: center;
+    }
 }
 
 table {
@@ -190,4 +210,62 @@ td.small {
 .page-link.active {
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th,td {
+        max-width: unset;
+    }
+
+    td.shaded {
+        border: none;
+    }
+
+    tbody {
+        display: flex;
+        flex-direction: column;
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin: 0 0 1rem;
+        border: none;
+        border-radius: 0.25rem;
+        overflow: hidden; 
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid var(--c-gray-600);
+        position: relative;
+        padding-left: 50%;
+        text-align: center;
+    }
+
+    td:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        content: attr(data-label);
+    }
+
+    td:nth-of-type(1):before { content: ""; }
+    td:nth-of-type(2):before { content: "Url"; }
+    td:nth-of-type(3):before { content: "Ip-adress"; }
+    td:nth-of-type(4):before { content: "Månad"; }
+    td:nth-of-type(5):before { content: "Dag"; }
+    td:nth-of-type(6):before { content: "Klockslag"; }
+}
+
 </style>
