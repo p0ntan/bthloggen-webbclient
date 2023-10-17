@@ -42,7 +42,10 @@ export default {
                 const result = await response.json()
 
                 this.$store.result = result
-                this.$store.prevSearches.push({...this.$data, hits: result.length})
+                this.$store.prevSearches = [
+                    ...this.$store.prevSearches,
+                    {...this.$data, hits: result.length}
+                ]
             } catch (error) {
                 console.error(error)
             }

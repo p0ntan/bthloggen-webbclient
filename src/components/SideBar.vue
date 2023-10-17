@@ -5,7 +5,7 @@
                 Inget att visa.
         </p>
         <ul v-else class="prev-search">
-            <li v-for="search in this.$store.prevSearches.slice(-5)">
+            <li v-for="search in lastFive">
                 <PrevSearch :search="search"/>
             </li>
         </ul>
@@ -23,6 +23,12 @@ export default {
     name: "SideBar",
     components: {
         PrevSearch
+    },
+    computed: {
+        lastFive() {
+            const lastFive = [...this.$store.prevSearches.slice(-5)]
+            return lastFive
+        }
     }
 }
 </script>

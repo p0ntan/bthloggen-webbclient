@@ -66,12 +66,12 @@ export default {
         '$store.result': {
             immediate: true,
             handler() {
-                this.currentPage = 0
                 this.updateResultTable()
             }
         },
         currentPage() {
             this.paginateResults()
+            this.updatePageLinks()
         },
     },
     methods: {
@@ -106,10 +106,11 @@ export default {
             this.pageLinks = []
  
             for (let i = startPage; i <= endPage; i++) {
-                this.pageLinks.push(i)
+                this.pageLinks = [...this.pageLinks, i]
             }
         },
         updateResultTable() {
+            this.currentPage = 0
             this.itemsPerPage = this.updatedItemsPerPage
             this.totalPages = Math.ceil(this.$store.result.length / this.itemsPerPage)
             this.updatePageLinks()

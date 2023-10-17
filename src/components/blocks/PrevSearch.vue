@@ -42,10 +42,22 @@ export default{
                 const result = await response.json()
 
                 this.$store.result = result
-                this.$store.prevSearches.push({...this.$data, hits: result.length})
                 this.$store.prevParam = {...this.$data}
             } catch (error) {
                 console.error(error)
+            }
+        }
+    },
+    watch: {
+        search: {
+            deep: true,
+            async handler(newValue) {
+                this.url = newValue.url
+                this.ip = newValue.ip
+                this.month = newValue.month
+                this.day = newValue.day
+                this.time = newValue.time
+                this.hits = newValue.hits
             }
         }
     }
